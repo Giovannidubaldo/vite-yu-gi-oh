@@ -2,6 +2,7 @@
 import Loader from './components/Loader.vue';
 import AppHeader from './components/AppHeader.vue';
 import SelectType from './components/SelectType.vue';
+import ResultFound from './components/ResultFound.vue';
 import CardContainer from './components/CardContainer.vue';
 
 import axios from 'axios';
@@ -12,6 +13,7 @@ export default {
     Loader,
     AppHeader,
     SelectType,
+    ResultFound,
     CardContainer,
   },
   created() {
@@ -47,6 +49,7 @@ export default {
       <main>
         <div class="container">
           <SelectType />
+          <ResultFound />
           <CardContainer />
         </div>
       </main>
