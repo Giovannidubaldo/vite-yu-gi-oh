@@ -16,9 +16,9 @@ export default {
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-3" v-for="(card, index) in store.cardList" :key="index">
                     <div class="card-style">
-                        <img :src="card.card_images" alt="" class="img-fluid">
-                        <h4 class="text-center text-white">{{card.name}}</h4>
-                        <h6 class="text-center mt-3">{{card.type}}</h6>
+                        <img :src="card.card_images[0].image_url" alt="" class="img-fluid">
+                        <h4 class="text-center text-white m-2">{{card.name}}</h4>
+                        <h6 class="text-center my-3">{{card.archetype}}</h6>
                     </div>
                 </div>
             </div>
@@ -29,12 +29,16 @@ export default {
 <style lang="scss">
 .card-container {
     background-color: white;
-    padding: 30px;
+    padding: 20px;
 
     .card-style {
         background-color: orange;
-        margin: 20px;
-        height: 200px;
+        margin: 10px;
+        min-height: 500px;
+
+        img {
+            max-width: 100%;
+        }
     }
 }
 </style>
