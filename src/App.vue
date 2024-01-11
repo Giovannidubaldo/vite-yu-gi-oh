@@ -1,7 +1,8 @@
 <script>
-import AppHeader from './components/AppHeader.vue';
-import AppMain from './components/AppMain.vue';
 import Loader from './components/Loader.vue';
+import AppHeader from './components/AppHeader.vue';
+import SelectType from './components/SelectType.vue';
+import CardContainer from './components/CardContainer.vue';
 
 import axios from 'axios';
 import { store } from './store.js';
@@ -10,7 +11,11 @@ export default {
   components: {
     Loader,
     AppHeader,
-    AppMain,
+    SelectType,
+    CardContainer,
+  },
+  created() {
+    this.getCard()
   },
   data() {
     return {
@@ -19,15 +24,18 @@ export default {
   },
   methods: {
     getCard() {
-      axios.get(store.endpoint).then((response) => {
-        this.store.cardList = response.data.data;
-        this.store.loading = false
+      let api = store.endpoint
+
+      if (store.type !== '') {
+        api += `?archetype=${store.type}`
+      }
+
+      axios.get(api).then((response) => {
+        store.cardList = response.data.data;
+        store.loading = false
       })
     }
   },
-  created() {
-    this.getCard()
-  }
 }
 </script>
 
@@ -36,7 +44,12 @@ export default {
     <Loader v-if="store.loading" />
     <div v-else>
       <AppHeader />
-      <AppMain />
+      <main>
+        <div class="container">
+          <SelectType />
+          <CardContainer />
+        </div>
+      </main>
     </div>
   </div>
 </template>
