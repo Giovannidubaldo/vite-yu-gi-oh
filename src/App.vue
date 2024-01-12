@@ -16,29 +16,31 @@ export default {
     ResultFound,
     CardContainer,
   },
-  created() {
-    this.getCard()
-  },
   data() {
     return {
       store
     }
   },
+  created() {
+    this.getCard()
+  },
   methods: {
     getCard() {
-      let api = store.endpoint
-
+      let endpoint = store.endpoint;
       if (store.type !== '') {
-        api += `?archetype=${store.type}`
+        endpoint += `&archetype=${store.type}`
       }
-
-      axios.get(api).then((response) => {
+      axios.get(endpoint).then((response) => {
         store.cardList = response.data.data;
         store.loading = false
       })
+    },
+    filterCardsArchetype() {
+      this.getCard()
     }
-  },
+  }
 }
+
 </script>
 
 <template lang="">
@@ -48,7 +50,7 @@ export default {
       <AppHeader />
       <main>
         <div class="container">
-          <SelectType />
+          <SelectType @filter_cards="filterCardsArchetype"/>
           <ResultFound />
           <CardContainer />
         </div>
